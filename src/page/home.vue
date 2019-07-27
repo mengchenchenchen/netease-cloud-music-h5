@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>this is home</div>
+    <div>this is home !!</div>
     <v-header></v-header>    
   </div>
 </template>
