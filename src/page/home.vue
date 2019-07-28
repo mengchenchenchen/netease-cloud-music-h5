@@ -1,12 +1,13 @@
+
 <template>
   <div>
-    <div>this is home !!</div>
-    <v-header></v-header>    
+    <div>this is home !! emm = qw</div>
+    <v-header></v-header>
   </div>
 </template>
 
 <script>
-import VHeader from "../components/header";
+import VHeader from "@comp/header.vue";
 export default {
   components: { VHeader },
   props: {},

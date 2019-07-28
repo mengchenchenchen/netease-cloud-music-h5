@@ -1,10 +1,16 @@
 <template>
-  <div>header</div>
+  <div>haha: {{msg}}</div>
 </template>
 
 <script>
 export default {
-  props: {}
+  props: {},
+  data(){
+    return {msg:'this is msfg'}
+  }  ,
+  computed:{
+     
+  } 
 };
 </script>
 
