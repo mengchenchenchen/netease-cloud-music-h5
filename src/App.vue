@@ -1,14 +1,12 @@
 <template>
   <div id="app">
-    <v-home></v-home>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import VHome from "./page/home";
 export default {
   components: {
-    VHome
   }
 };
 </script>

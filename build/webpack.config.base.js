@@ -17,7 +17,8 @@ module.exports = {
         alias: {
             '@src': resolve('src/'),
             '@comp': resolve('src/components'),
-            '@page': resolve('src/page/')
+            '@page': resolve('src/page/'),
+            '@exp': resolve('src/examples')
         }
     },
 
