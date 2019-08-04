@@ -2,7 +2,7 @@
   <v-layout justify-space-between>
     <v-icon @icon_click="menu_click"></v-icon>
     <v-layout>
-      <span v-for="header in header_list" :key="header" @click="header_click(header)">{{header}}</span>
+      <span v-for="header in header_list" :key="header" class="title-content" @click="header_click(header)">{{header}}</span>
     </v-layout>
     <v-icon></v-icon>
   </v-layout>
@@ -31,4 +31,7 @@ export default {
 </script>
 
 <style scoped>
+.title-content{
+  margin: 10px 20px;
+}
 </style>

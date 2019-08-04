@@ -18,7 +18,7 @@ module.exports = {
             '@src': resolve('src/'),
             '@comp': resolve('src/components'),
             '@page': resolve('src/page/'),
-            '@exp': resolve('src/examples')
+            '@exp': resolve('src/example')
         }
     },
 

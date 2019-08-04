@@ -1,14 +1,22 @@
 <template>
-  <div>this is example page</div>
+  <div>
+    <div>this is example page</div>
+    <v-btn @click="go_to_exp">popup</v-btn>
+  </div>
 </template>
 <script>
+import VBtn from "@comp/btn";
 export default {
-  components: {},
+  components: { VBtn },
   data() {
     return {};
   },
   computed: {},
-  methods: {}
+  methods: {
+    go_to_exp(){
+      this.$router.push('/exp/popup')
+    }
+  }
 };
 </script>
 <style scoped>
