@@ -1,9 +1,18 @@
 <template>
-  <div v-if="anim_show" class="wrapper" @click="$emit('mask_click')">
-    <div :style="content_style" class="content" :class="content_class"></div>
+  <div>
+    <div :class="wrapper_class" class="wrapper" @click="$emit('mask_click')">
+      <div :style="content_style" class="content" :class="content_class"></div>
+    </div>
   </div>
 </template>
 <script>
+const transitionEvents = [
+  "msTransitionEnd",
+  "mozTransitionEnd",
+  "oTransitionEnd",
+  "webkitTransitionEnd",
+  "transitionend"
+];
 export default {
   props: {
     show: {
@@ -12,7 +21,7 @@ export default {
     },
     pos: {
       type: String,
-      default: "top"
+      default: "left"
     },
     width: {
       type: String | Number,
@@ -30,24 +39,65 @@ export default {
         backgroundColor: this.bgColor
       },
       content_class: [],
+      wrapper_class: [],
       anim_show: false
     };
   },
-  created() {},
+  created() {
+    this.wrapper_class = ["wrapper-init"];
+  },
+  mounted() {
+    this.bindTransition();
+  },
+  beforeDestroy() {
+    this.unBindTransition();
+  },
   computed: {},
   methods: {
     start_anim() {
       this.content_class = ["init"];
-      this.anim_show = true;
+      this.wrapper_class = ["wrapper-init"];
+      // this.anim_show = true;
       setTimeout(() => {
         this.content_class = ["final"];
+        this.wrapper_class = ["wrapper-final"];
       }, 100);
     },
     fade_anim() {
       this.content_class = ["init"];
-      setTimeout(() => {
-        this.anim_show = false;
-      }, 800);
+
+      // setTimeout(() => {
+      //   this.anim_show = false;
+      // }, 800);
+    },
+    bindTransition() {
+      console.log("00000");
+      this.handleTransition = e => {
+        console.log("1111111", e);
+        if (e.propertyName !== "width") {
+          return;
+        }
+        // 关闭时
+        if (this.anim_show) {
+          this.wrapper_class = ["wrapper-init"];
+          this.anim_show = false;
+        } else {
+          // 打开时
+          this.anim_show = true;
+        }
+        // this.anim_show = !this.anim_show;
+        // if (e.propertyName !== "transform") return;
+        // this.$emit(this.open ? "show" : "hide");
+      };
+      transitionEvents.forEach(eventName => {
+        this.$el.addEventListener(eventName, this.handleTransition);
+      });
+    },
+    unBindTransition() {
+      if (!this.handleTransition) return;
+      transitionEvents.forEach(eventName => {
+        this.$el.removeEventListener(eventName, this.handleTransition);
+      });
     }
   },
   watch: {
@@ -57,6 +107,9 @@ export default {
       } else {
         this.fade_anim();
       }
+    },
+    anim_show(val) {
+      console.log("+++", val);
     }
   }
 };
@@ -73,8 +126,14 @@ export default {
 .init {
   width: 0;
 }
+.wrapper-init {
+  visibility: hidden;
+}
 .final {
   width: 200px;
+}
+.wrapper-final {
+  visibility: visible;
 }
 .content {
   top: 0;
