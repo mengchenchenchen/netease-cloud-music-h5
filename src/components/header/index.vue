@@ -1,22 +1,32 @@
 <template>
-  <v-layout justify-space-between>
-    <v-icon @icon_click="menu_click"></v-icon>
-    <v-layout>
-      <span v-for="header in header_list" :key="header" class="title-content" @click="header_click(header)">{{header}}</span>
+  <div>
+    <v-layout justify-space-between align-center>
+      <v-icon @icon_click="menu_click">&#xe871;</v-icon>
+      <v-layout>
+        <span
+          v-for="header in header_list"
+          :key="header"
+          class="title-content"
+          @click="header_click(header)"
+        >{{header}}</span>
+      </v-layout>
+      <v-icon>&#xebbb;</v-icon>
     </v-layout>
-    <v-icon></v-icon>
-  </v-layout>
+    <v-popup :show="show_menu" @mask_click="show_menu=false"></v-popup>
+  </div>
 </template>
 
 <script>
 import VLayout from "@comp/layout";
 import VIcon from "@comp/icon";
+import VPopup from "@comp/popup";
 export default {
   props: {},
-  components: { VLayout, VIcon },
+  components: { VLayout, VIcon, VPopup },
   data() {
     return {
-      header_list: ["我的", "发现", "云村", "视频"]
+      header_list: ["我的", "发现", "云村", "视频"],
+      show_menu:false,
     };
   },
   methods: {
@@ -24,14 +34,14 @@ export default {
       console.log(header);
     },
     menu_click() {
-      console.log("弹出右侧菜单");
+      this.show_menu = true
     }
   }
 };
 </script>
 
 <style scoped>
-.title-content{
+.title-content {
   margin: 10px 20px;
 }
 </style>

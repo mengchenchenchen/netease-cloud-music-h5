@@ -40,11 +40,13 @@ export default {
       },
       content_class: [],
       wrapper_class: [],
-      anim_show: false
+      anim_show: false,
+      handleTransition: null
     };
   },
   created() {
     this.wrapper_class = ["wrapper-init"];
+    this.content_class = ["init"];
   },
   mounted() {
     this.bindTransition();
@@ -55,9 +57,6 @@ export default {
   computed: {},
   methods: {
     start_anim() {
-      this.content_class = ["init"];
-      this.wrapper_class = ["wrapper-init"];
-      // this.anim_show = true;
       setTimeout(() => {
         this.content_class = ["final"];
         this.wrapper_class = ["wrapper-final"];
@@ -65,15 +64,9 @@ export default {
     },
     fade_anim() {
       this.content_class = ["init"];
-
-      // setTimeout(() => {
-      //   this.anim_show = false;
-      // }, 800);
     },
     bindTransition() {
-      console.log("00000");
       this.handleTransition = e => {
-        console.log("1111111", e);
         if (e.propertyName !== "width") {
           return;
         }
@@ -85,9 +78,6 @@ export default {
           // 打开时
           this.anim_show = true;
         }
-        // this.anim_show = !this.anim_show;
-        // if (e.propertyName !== "transform") return;
-        // this.$emit(this.open ? "show" : "hide");
       };
       transitionEvents.forEach(eventName => {
         this.$el.addEventListener(eventName, this.handleTransition);
@@ -107,10 +97,10 @@ export default {
       } else {
         this.fade_anim();
       }
-    },
-    anim_show(val) {
-      console.log("+++", val);
     }
+    // anim_show(val) {
+    //   console.log("+++", val);
+    // }
   }
 };
 </script>

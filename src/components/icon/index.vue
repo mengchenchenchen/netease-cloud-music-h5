@@ -1,8 +1,16 @@
 <template>
-  <span @click="$emit('icon_click')" class="iconfont">&#xe77d;</span>
+  <span @click="$emit('icon_click')" class="iconfont">
+    <slot>&#xe77d;</slot>
+  </span>
 </template>
 <script>
 export default {
+  props: {
+    size: {
+      type: String | Number,
+      default: 16
+    }
+  },
   components: {},
   data() {
     return {};
