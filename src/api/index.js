@@ -3,7 +3,7 @@ const base_url = "http://localhost:3000";
 export default {
   get(url, params, config) {
     return axios
-      .get(base_url + url, params, config)
+      .get(base_url + url, { params }, config)
       .then(res => {
         if (res.status === 200) {
           return res;

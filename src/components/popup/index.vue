@@ -24,7 +24,7 @@ export default {
       default: "left"
     },
     width: {
-      type: String | Number,
+      type: [String, Number],
       default: "200px"
     },
     bgColor: {
@@ -93,8 +93,10 @@ export default {
   watch: {
     show(value) {
       if (value) {
+        this.anim_show = false
         this.start_anim();
       } else {
+        this.anim_show =true
         this.fade_anim();
       }
     }

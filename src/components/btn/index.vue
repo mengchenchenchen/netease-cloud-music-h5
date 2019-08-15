@@ -5,13 +5,19 @@
 </template>
 <script>
 export default {
+  props: {
+    fixed: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {},
-  data () {
-    return {}
+  data() {
+    return {};
   },
   computed: {},
   methods: {}
-}
+};
 </script>
 <style scoped>
 </style>
