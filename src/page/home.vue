@@ -1,6 +1,6 @@
 
 <template>
-  <div style="position: relative;">
+  <div class="wrapper">
     <home-header></home-header>
     <!-- <div>{{banners}}</div> -->
     <home-banners :banners="banners"></home-banners>
@@ -39,6 +39,12 @@ export default {
 };
 </script>
 <style  scoped>
+.wrapper{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .fix-btn {
   position: fixed;
   width: 50px;
