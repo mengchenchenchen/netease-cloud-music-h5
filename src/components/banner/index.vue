@@ -1,16 +1,12 @@
 <template>
-  <!-- <div class="wrapper" :style="size_style">
-    <div :style="wrapper_style">
-      <div v-for="banner in banners" :key="banner.bannerId">
-        <img :src="banner.pic" :style="size_style" alt />
+  <div :style="item_style" class="wrapper">
+    <div :style="banner_style" class="banners_wrapper">
+      <div v-for=" item in banners" :key="item.bannerId">
+        <img :src="item.pic" :style="item_style" alt />
       </div>
     </div>
-  </div>-->
-  <el-carousel :height="height">
-    <el-carousel-item v-for="item in banners" :key="item.bannerId">
-      <img :src="item.pic" class="small" alt />
-    </el-carousel-item>
-  </el-carousel>
+  </div>
+
 </template>
 <script>
 export default {
@@ -21,42 +17,72 @@ export default {
         return [];
       }
     },
-    width: {
-      type: [String, Number],
+    curr_index: {
+      type: Number,
+      default: 0
+    },
+    item_width: {
+      type: Number,
       default() {
         return 200;
       }
     },
-    height: {
-      type: [String, Number],
+    item_height: {
+      type: Number,
       default() {
-        return "200px";
+        return 200;
       }
     }
   },
   components: {},
   data() {
-    return {};
+    return {
+      margin_left: 0
+    };
+  },
+  created() {
+    setInterval(() => {
+      this.next();
+    }, 2000);
   },
   computed: {
-    wrapper_style() {
+    banner_style() {
       return {
-        width: this.width * this.banners.length + "px",
-        display: "flex"
+        marginLeft: this.margin_left + "px",
+        width: this.item_width * this.item_count + "px",
+        height: this.item_height + "px"
       };
     },
-    size_style() {
+    item_count() {
+      return this.banners.length;
+    },
+    item_style() {
       return {
-        width: this.width + "px",
-        height: this.height
+        width: this.item_width + "px",
+        height: this.item_height + "px"
       };
     }
   },
-  methods: {}
+  methods: {
+    next() {
+      console.log("next: " + this.margin_left);
+      const index = (0 - this.margin_left) / this.item_width;
+      if (index === this.item_count - 1) {
+        this.margin_left = 0;
+      } else {
+        const next_left = this.margin_left - this.item_width;
+        this.margin_left = next_left;
+      }
+    }
+  }
 };
 </script>
 <style scoped>
 .wrapper {
   overflow: hidden;
+}
+.banners_wrapper {
+  display: flex;
+  flex-direction: row;
 }
 </style>
